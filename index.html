@@ -78,10 +78,11 @@
 
   #work { background: var(--black); }
   .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; }
-  .project-card { cursor: pointer; background: var(--card); border: 1px solid var(--border); padding: 40px 36px; position: relative; overflow: hidden; transition: border-color 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; }
+  .project-card { background: var(--card); border: 1px solid var(--border); padding: 40px 36px; position: relative; overflow: hidden; transition: border-color 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; }
   .project-card:hover { border-color: rgba(200,240,46,0.25); }
-  .project-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,240,46,0.03) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; }
+  .project-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,240,46,0.03) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
   .project-card:hover::after { opacity: 1; }
+  .project-card.clickable { cursor: pointer; }
   .project-card.col-7 { grid-column: span 7; }
   .project-card.col-5 { grid-column: span 5; }
   .project-card.col-4 { grid-column: span 4; }
@@ -89,13 +90,18 @@
   .project-tag { display: inline-block; background: rgba(200,240,46,0.08); border: 1px solid rgba(200,240,46,0.2); color: var(--accent); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; margin-bottom: 20px; }
   .project-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(18px, 2vw, 26px); color: var(--white); line-height: 1.2; margin-bottom: 16px; }
   .project-desc { font-size: 14px; color: var(--text); line-height: 1.7; flex: 1; margin-bottom: 28px; }
-  .project-meta { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 20px; }
+  .project-meta { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 20px; flex-wrap: wrap; gap: 12px; }
   .project-client { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
-  .project-arrow { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 16px; transition: all 0.2s; cursor: pointer; }
-  .project-card:hover .project-arrow { border-color: var(--accent); color: var(--accent); transform: rotate(45deg); }
-  .project-num { position: absolute; top: 24px; right: 24px; font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: rgba(255,255,255,0.03); line-height: 1; }
-  .project-accent-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1); }
+  .project-arrow { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 16px; transition: all 0.2s; flex-shrink: 0; }
+  .project-card.clickable:hover .project-arrow { border-color: var(--accent); color: var(--accent); transform: rotate(45deg); }
+  .project-num { position: absolute; top: 24px; right: 24px; font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; }
+  .project-accent-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1); pointer-events: none; }
   .project-card:hover .project-accent-bar { transform: scaleX(1); }
+
+  /* Pharaoh Wear dual buttons */
+  .pdf-btns { display: flex; gap: 8px; flex-wrap: wrap; }
+  .pdf-btn { text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border); padding: 0 14px; height: 36px; color: var(--muted); font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; transition: border-color 0.2s, color 0.2s; white-space: nowrap; position: relative; z-index: 10; }
+  .pdf-btn:hover { border-color: var(--accent); color: var(--accent); }
 
   #about { background: var(--dark); }
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
@@ -152,6 +158,8 @@
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
     .contact-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
+    .pdf-btns { width: 100%; }
+    .pdf-btn { flex: 1; }
   }
 </style>
 </head>
@@ -226,11 +234,11 @@
   <div class="projects-grid">
 
     <!-- CARD 01 -->
-    <div class="project-card col-7 reveal" data-link="bassant-ahmed.pdf">
+    <div class="project-card col-7 clickable reveal" data-link="bassant-ahmed.pdf">
       <div class="project-num">01</div>
       <div>
         <div class="project-tag">Content Strategy · Creator Plan</div>
-        <h3 class="project-title">Bassant Ahmed — Sample Content Plan</h3>
+        <h3 class="project-title">Bassant Ahmed — Full Content Plan</h3>
         <p class="project-desc">Developed a comprehensive 16+ reel content strategy covering Outdoor Vlogs, Lifestyle Series, Artistic Location shoots, and Home Series. Scripted voiceovers, defined moods, execution styles, and location scouting for each episode.</p>
       </div>
       <div class="project-meta">
@@ -241,7 +249,7 @@
     </div>
 
     <!-- CARD 02 — J-FUEL -->
-    <div class="project-card col-5 reveal reveal-delay-1" data-link="jfuel_Website Banners.pdf">
+    <div class="project-card col-5 clickable reveal reveal-delay-1" data-link="jfuel_Website Banners.pdf">
       <div class="project-num">02</div>
       <div>
         <div class="project-tag">Brand Strategy · Web Content</div>
@@ -256,7 +264,7 @@
     </div>
 
     <!-- CARD 03 -->
-    <div class="project-card col-4 reveal reveal-delay-2" data-link="content-uf.pdf">
+    <div class="project-card col-4 clickable reveal reveal-delay-2" data-link="content-uf.pdf">
       <div class="project-num">03</div>
       <div>
         <div class="project-tag">Copywriting · Social Media</div>
@@ -270,13 +278,13 @@
       <div class="project-accent-bar"></div>
     </div>
 
-    <!-- CARD 04 — Pharaoh Wear (opens 2 PDFs) -->
-    <div class="project-card col-8 reveal reveal-delay-3" id="card-pharaoh">
+    <!-- CARD 04 — Pharaoh Wear Content Grid -->
+    <div class="project-card col-4 clickable reveal reveal-delay-3" data-link="Content_Grid_for_Pharaoh_Wear__Pyramids_Shooting__.pdf">
       <div class="project-num">04</div>
       <div>
         <div class="project-tag">Creative Direction · Fashion Brand</div>
-        <h3 class="project-title">Pharaoh Wear — Creative Content & Pyramids Shoot</h3>
-        <p class="project-desc">Developed a full content grid and cinematic reel concepts for a fashion brand shoot at the Pyramids of Giza. Covered visual direction, shot descriptions, captions, BTS strategy, and brand tone — blending cultural identity with modern storytelling.</p>
+        <h3 class="project-title">Pharaoh Wear — Content Grid</h3>
+        <p class="project-desc">Developed a full content grid for a fashion brand shoot at the Pyramids of Giza. Covered visual direction, shot descriptions, and BTS strategy.</p>
       </div>
       <div class="project-meta">
         <span class="project-client">Pharaoh Wear</span>
@@ -285,9 +293,24 @@
       <div class="project-accent-bar"></div>
     </div>
 
-    <!-- CARD 05 — Dr. Amr Arafa Pharmacy -->
-    <div class="project-card col-8 reveal reveal-delay-1" data-link="CONTENT PLAN WEEK 16_5 pharmacey d_ amr .pdf">
+    <!-- CARD 05 — Pharaoh Wear Creative Reels -->
+    <div class="project-card col-4 clickable reveal reveal-delay-4" data-link="creative_for__Pharaoh_Wear_.pdf">
       <div class="project-num">05</div>
+      <div>
+        <div class="project-tag">Reel Concepting · Fashion Brand</div>
+        <h3 class="project-title">Pharaoh Wear — Creative Reels</h3>
+        <p class="project-desc">Scripted cinematic reel concepts blending cultural identity with modern storytelling — including captions, brand tone, and visual direction for each reel.</p>
+      </div>
+      <div class="project-meta">
+        <span class="project-client">Pharaoh Wear</span>
+        <div class="project-arrow">↗</div>
+      </div>
+      <div class="project-accent-bar"></div>
+    </div>
+
+    <!-- CARD 06 — Dr. Amr Arafa Pharmacy -->
+    <div class="project-card col-8 clickable reveal reveal-delay-1" data-link="CONTENT PLAN WEEK 16_5 pharmacey d_ amr .pdf">
+      <div class="project-num">06</div>
       <div>
         <div class="project-tag">Content Strategy · Pharmacy</div>
         <h3 class="project-title">Dr. Amr Arafa Pharmacy — Weekly Content Plan</h3>
@@ -405,18 +428,11 @@
     setTimeout(() => el.classList.add('visible'), 200 + i * 150);
   });
 
-  // Cards with single PDF
-  document.querySelectorAll('.project-card[data-link]').forEach(card => {
+  // Only clickable cards open PDF on full card click
+  document.querySelectorAll('.project-card.clickable[data-link]').forEach(card => {
     card.addEventListener('click', () => {
-      const link = card.getAttribute('data-link');
-      if (link) window.open(link, '_blank');
+      window.open(card.getAttribute('data-link'), '_blank');
     });
-  });
-
-  // Card 04 — Pharaoh Wear — opens 2 PDFs
-  document.getElementById('card-pharaoh').addEventListener('click', () => {
-    window.open('Content_Grid_for_Pharaoh_Wear__Pyramids_Shooting__.pdf', '_blank');
-    window.open('creative_for__Pharaoh_Wear_.pdf', '_blank');
   });
 </script>
 </body>

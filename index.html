@@ -51,7 +51,7 @@
   .hero-photo-wrap { position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding-top: 120px; }
   .hero-photo-frame { position: relative; width: 100%; max-width: 440px; }
   .hero-photo-frame::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, var(--accent), transparent 60%); z-index: -1; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); }
-  .hero-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top center; display: block; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); filter: grayscale(20%); }
+  .hero-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top center; display: block; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); filter: none; }
   .hero-photo-badge { position: absolute; bottom: 32px; left: -28px; background: var(--accent); color: var(--black); padding: 16px 24px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
   .hero-photo-badge span { display: block; font-size: 22px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0; }
 
@@ -78,7 +78,7 @@
 
   #work { background: var(--black); }
   .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; }
-  .project-card { background: var(--card); border: 1px solid var(--border); padding: 40px 36px; position: relative; overflow: hidden; transition: border-color 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; }
+  .project-card { cursor: pointer; background: var(--card); border: 1px solid var(--border); padding: 40px 36px; position: relative; overflow: hidden; transition: border-color 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; }
   .project-card:hover { border-color: rgba(200,240,46,0.25); }
   .project-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,240,46,0.03) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; }
   .project-card:hover::after { opacity: 1; }
@@ -179,7 +179,7 @@
       <span class="outline">YOSSEF</span><br>
       <span>MOHA<span class="accent">M</span>MED</span>
     </h1>
-    <p class="hero-sub reveal reveal-delay-2">Content Creator & Content Strategist</p>
+    <p class="hero-sub reveal reveal-delay-2">Multi-skilled Content creator</p>
     <p class="hero-bio reveal reveal-delay-3">
       Obsessed with the intersection of <em>clear strategy</em> and <em>powerful visual storytelling</em>. I build data-backed content plans that transform how brands communicate, connect, and grow online.
     </p>
@@ -187,7 +187,7 @@
   </div>
   <div class="hero-photo-wrap reveal reveal-delay-2">
     <div class="hero-photo-frame">
-      <img class="hero-photo" src="WhatsApp Image 2026-05-27 at 8.17.04 PM.jpeg" alt="Yossef Mohammed">
+      <img class="hero-photo" src="youssef-mohammed.jpeg" alt="Yossef Mohammed">
       <div class="hero-photo-badge">
         <span>100%</span>
         Strategy Driven
@@ -226,11 +226,11 @@
   <div class="projects-grid">
 
     <!-- CARD 01 -->
-    <div class="project-card col-7 reveal">
+    <div class="project-card col-7 reveal" data-link="bassant-ahmed.pdf">
       <div class="project-num">01</div>
       <div>
         <div class="project-tag">Content Strategy · Creator Plan</div>
-        <h3 class="project-title">Bassant Ahmed — Full Content Plan</h3>
+        <h3 class="project-title">Bassant Ahmed — Sample Content Plan</h3>
         <p class="project-desc">Developed a comprehensive 16+ reel content strategy covering Outdoor Vlogs, Lifestyle Series, Artistic Location shoots, and Home Series. Scripted voiceovers, defined moods, execution styles, and location scouting for each episode.</p>
       </div>
       <div class="project-meta">
@@ -241,7 +241,7 @@
     </div>
 
     <!-- CARD 02 — J-FUEL -->
-    <div class="project-card col-5 reveal reveal-delay-1">
+    <div class="project-card col-5 reveal reveal-delay-1" data-link="jfuel_Website Banners.pdf">
       <div class="project-num">02</div>
       <div>
         <div class="project-tag">Brand Strategy · Web Content</div>
@@ -250,19 +250,17 @@
       </div>
       <div class="project-meta">
         <span class="project-client">@jfuel_supplements</span>
-        <a href="jfuel_Website Banners.pdf" target="_blank" rel="noopener" style="text-decoration:none;">
-          <div class="project-arrow">↗</div>
-        </a>
+        <div class="project-arrow">↗</div>
       </div>
       <div class="project-accent-bar"></div>
     </div>
 
     <!-- CARD 03 -->
-    <div class="project-card col-4 reveal reveal-delay-2">
+    <div class="project-card col-4 reveal reveal-delay-2" data-link="content-uf.pdf">
       <div class="project-num">03</div>
       <div>
         <div class="project-tag">Copywriting · Social Media</div>
-        <h3 class="project-title">U First — Social Video Captions & CTAs</h3>
+        <h3 class="project-title">Sample Content Reels — U First Agency</h3>
         <p class="project-desc">Wrote strategic captions and CTAs for 5 social videos for a marketing agency. Sharp messaging designed to convert and build brand authority.</p>
       </div>
       <div class="project-meta">
@@ -272,16 +270,31 @@
       <div class="project-accent-bar"></div>
     </div>
 
-    <!-- CARD 04 -->
-    <div class="project-card col-8 reveal reveal-delay-3">
+    <!-- CARD 04 — Pharaoh Wear (opens 2 PDFs) -->
+    <div class="project-card col-8 reveal reveal-delay-3" id="card-pharaoh">
       <div class="project-num">04</div>
       <div>
-        <div class="project-tag">Creative Writing · Fashion Brand</div>
-        <h3 class="project-title">Pharaoh Wear — Creative Content</h3>
-        <p class="project-desc">Developed creative content for a fashion brand, blending strong cultural identity with modern storytelling. Focused on brand voice, visual direction, and connecting authentically with the target audience.</p>
+        <div class="project-tag">Creative Direction · Fashion Brand</div>
+        <h3 class="project-title">Pharaoh Wear — Creative Content & Pyramids Shoot</h3>
+        <p class="project-desc">Developed a full content grid and cinematic reel concepts for a fashion brand shoot at the Pyramids of Giza. Covered visual direction, shot descriptions, captions, BTS strategy, and brand tone — blending cultural identity with modern storytelling.</p>
       </div>
       <div class="project-meta">
         <span class="project-client">Pharaoh Wear</span>
+        <div class="project-arrow">↗</div>
+      </div>
+      <div class="project-accent-bar"></div>
+    </div>
+
+    <!-- CARD 05 — Dr. Amr Arafa Pharmacy -->
+    <div class="project-card col-8 reveal reveal-delay-1" data-link="CONTENT PLAN WEEK 16_5 pharmacey d_ amr .pdf">
+      <div class="project-num">05</div>
+      <div>
+        <div class="project-tag">Content Strategy · Pharmacy</div>
+        <h3 class="project-title">Dr. Amr Arafa Pharmacy — Weekly Content Plan</h3>
+        <p class="project-desc">Built a full weekly content plan for a pharmacy brand — including Reels, promotional Posts, and Stories. Covered hair care product launches, brand offers, and seasonal content with captions and CTAs.</p>
+      </div>
+      <div class="project-meta">
+        <span class="project-client">Dr. Amr Arafa Pharmacy</span>
         <div class="project-arrow">↗</div>
       </div>
       <div class="project-accent-bar"></div>
@@ -378,15 +391,32 @@
     el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2.5)');
     el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
   });
+
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
+
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
   reveals.forEach(el => observer.observe(el));
+
   document.querySelectorAll('.hero .reveal').forEach((el, i) => {
     setTimeout(() => el.classList.add('visible'), 200 + i * 150);
+  });
+
+  // Cards with single PDF
+  document.querySelectorAll('.project-card[data-link]').forEach(card => {
+    card.addEventListener('click', () => {
+      const link = card.getAttribute('data-link');
+      if (link) window.open(link, '_blank');
+    });
+  });
+
+  // Card 04 — Pharaoh Wear — opens 2 PDFs
+  document.getElementById('card-pharaoh').addEventListener('click', () => {
+    window.open('Content_Grid_for_Pharaoh_Wear__Pyramids_Shooting__.pdf', '_blank');
+    window.open('creative_for__Pharaoh_Wear_.pdf', '_blank');
   });
 </script>
 </body>

@@ -7,25 +7,25 @@
 <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Syne:wght@400;600;700;800&family=DM+Sans:ital,wght@0,300;0,400;1,300&display=swap" rel="stylesheet">
 <style>
   :root {
-    --black: #080808;
-    --dark: #111111;
-    --card: #161616;
-    --border: #222222;
+    --black: #0a0707;
+    --dark: #120a0a;
+    --card: #170c0c;
+    --border: #2b1414;
     --white: #f0ede8;
-    --accent: #c8f02e;
-    --accent2: #ff4d1c;
-    --muted: #555555;
-    --text: #aaaaaa;
+    --accent: #ff2438;
+    --accent-rgb: 255, 36, 56;
+    --accent2: #ff5a36;
+    --accent2-rgb: 255, 90, 54;
+    --muted: #6b4d4d;
+    --text: #ad9999;
   }
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   html { scroll-behavior: smooth; }
-  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; cursor: none; }
-  .cursor { width: 12px; height: 12px; background: var(--accent); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9999; transition: transform 0.15s ease; mix-blend-mode: difference; }
-  .cursor-ring { width: 40px; height: 40px; border: 1px solid rgba(200,240,46,0.4); border-radius: 50%; position: fixed; top: 0; left: 0; pointer-events: none; z-index: 9998; transition: all 0.35s cubic-bezier(0.25,0.1,0.25,1); }
+  body { background: var(--black); color: var(--white); font-family: 'DM Sans', sans-serif; font-weight: 300; overflow-x: hidden; }
   body::before { content: ''; position: fixed; inset: 0; z-index: 1; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E"); pointer-events: none; opacity: 0.4; }
 
   nav { position: fixed; top: 0; left: 0; right: 0; z-index: 100; display: flex; justify-content: space-between; align-items: center; padding: 28px 60px; border-bottom: 1px solid transparent; transition: border-color 0.3s, background 0.3s; }
-  nav.scrolled { background: rgba(8,8,8,0.92); backdrop-filter: blur(20px); border-color: var(--border); }
+  nav.scrolled { background: rgba(10,7,7,0.92); backdrop-filter: blur(20px); border-color: var(--border); }
   .nav-logo { font-family: 'Bebas Neue', sans-serif; font-size: 22px; letter-spacing: 3px; color: var(--white); text-decoration: none; }
   .nav-logo span { color: var(--accent); }
   .nav-links { display: flex; gap: 40px; list-style: none; }
@@ -33,7 +33,7 @@
   .nav-links a:hover { color: var(--white); }
 
   .hero { min-height: 100vh; display: grid; grid-template-columns: 1fr 1fr; align-items: end; padding: 0 60px 80px; position: relative; overflow: hidden; gap: 60px; }
-  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(200,240,46,0.04) 0%, transparent 70%), radial-gradient(ellipse 50% 40% at 20% 80%, rgba(255,77,28,0.05) 0%, transparent 60%); }
+  .hero-bg { position: absolute; inset: 0; background: radial-gradient(ellipse 80% 60% at 70% 50%, rgba(var(--accent-rgb),0.08) 0%, transparent 70%), radial-gradient(ellipse 55% 45% at 15% 85%, rgba(var(--accent2-rgb),0.1) 0%, transparent 65%); }
   .hero-line { position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, transparent, var(--accent), transparent); animation: scanline 4s ease-in-out infinite; }
   @keyframes scanline { 0%,100% { top: 0; opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } 100% { top: 100%; opacity: 0; } }
   .hero-content { display: flex; flex-direction: column; justify-content: flex-end; position: relative; z-index: 2; }
@@ -51,7 +51,7 @@
   .hero-photo-wrap { position: relative; z-index: 2; display: flex; align-items: flex-end; justify-content: center; padding-top: 120px; }
   .hero-photo-frame { position: relative; width: 100%; max-width: 440px; }
   .hero-photo-frame::before { content: ''; position: absolute; inset: -2px; background: linear-gradient(135deg, var(--accent), transparent 60%); z-index: -1; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); }
-  .hero-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top center; display: block; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); filter: none; }
+  .hero-photo { width: 100%; aspect-ratio: 3/4; object-fit: cover; object-position: top center; display: block; clip-path: polygon(0 0, calc(100% - 20px) 0, 100% 20px, 100% 100%, 20px 100%, 0 calc(100% - 20px)); filter: grayscale(20%); }
   .hero-photo-badge { position: absolute; bottom: 32px; left: -28px; background: var(--accent); color: var(--black); padding: 16px 24px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 11px; letter-spacing: 2px; text-transform: uppercase; clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px)); }
   .hero-photo-badge span { display: block; font-size: 22px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0; }
 
@@ -71,37 +71,27 @@
   .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 2px; }
   .skill-item { background: var(--card); padding: 28px 24px; border: 1px solid var(--border); position: relative; overflow: hidden; transition: border-color 0.2s, transform 0.2s; }
   .skill-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); transform: scaleY(0); transform-origin: bottom; transition: transform 0.3s cubic-bezier(0.25,0.1,0.25,1); }
-  .skill-item:hover { border-color: rgba(200,240,46,0.2); transform: translateY(-3px); }
+  .skill-item:hover { border-color: rgba(var(--accent-rgb),0.2); transform: translateY(-3px); }
   .skill-item:hover::before { transform: scaleY(1); }
   .skill-num { font-family: 'Bebas Neue', sans-serif; font-size: 36px; color: var(--border); position: absolute; right: 16px; bottom: 10px; line-height: 1; }
   .skill-name { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 14px; line-height: 1.4; color: var(--white); }
 
   #work { background: var(--black); }
-  .projects-grid { display: grid; grid-template-columns: repeat(12, 1fr); gap: 2px; }
-  .project-card { background: var(--card); border: 1px solid var(--border); padding: 40px 36px; position: relative; overflow: hidden; transition: border-color 0.3s; display: flex; flex-direction: column; justify-content: space-between; min-height: 280px; }
-  .project-card:hover { border-color: rgba(200,240,46,0.25); }
-  .project-card::after { content: ''; position: absolute; inset: 0; background: linear-gradient(135deg, rgba(200,240,46,0.03) 0%, transparent 50%); opacity: 0; transition: opacity 0.3s; pointer-events: none; }
-  .project-card:hover::after { opacity: 1; }
-  .project-card.clickable { cursor: pointer; }
-  .project-card.col-7 { grid-column: span 7; }
-  .project-card.col-5 { grid-column: span 5; }
-  .project-card.col-4 { grid-column: span 4; }
-  .project-card.col-8 { grid-column: span 8; }
-  .project-tag { display: inline-block; background: rgba(200,240,46,0.08); border: 1px solid rgba(200,240,46,0.2); color: var(--accent); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; padding: 5px 12px; margin-bottom: 20px; }
-  .project-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: clamp(18px, 2vw, 26px); color: var(--white); line-height: 1.2; margin-bottom: 16px; }
-  .project-desc { font-size: 14px; color: var(--text); line-height: 1.7; flex: 1; margin-bottom: 28px; }
-  .project-meta { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid var(--border); padding-top: 20px; flex-wrap: wrap; gap: 12px; }
-  .project-client { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
-  .project-arrow { width: 36px; height: 36px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; color: var(--muted); font-size: 16px; transition: all 0.2s; flex-shrink: 0; }
-  .project-card.clickable:hover .project-arrow { border-color: var(--accent); color: var(--accent); transform: rotate(45deg); }
-  .project-num { position: absolute; top: 24px; right: 24px; font-family: 'Bebas Neue', sans-serif; font-size: 64px; color: rgba(255,255,255,0.03); line-height: 1; pointer-events: none; }
-  .project-accent-bar { position: absolute; bottom: 0; left: 0; right: 0; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left; transition: transform 0.4s cubic-bezier(0.25,0.1,0.25,1); pointer-events: none; }
-  .project-card:hover .project-accent-bar { transform: scaleX(1); }
-
-  /* Pharaoh Wear dual buttons */
-  .pdf-btns { display: flex; gap: 8px; flex-wrap: wrap; }
-  .pdf-btn { text-decoration: none; display: flex; align-items: center; justify-content: center; gap: 6px; border: 1px solid var(--border); padding: 0 14px; height: 36px; color: var(--muted); font-family: 'Syne', sans-serif; font-size: 11px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; transition: border-color 0.2s, color 0.2s; white-space: nowrap; position: relative; z-index: 10; }
-  .pdf-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .projects-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+  .project-card { cursor: pointer; background: var(--card); border: 1px solid var(--border); overflow: hidden; display: flex; flex-direction: column; transition: transform 0.35s cubic-bezier(0.25,0.1,0.25,1), border-color 0.3s; }
+  .project-card:hover { transform: translateY(-6px); border-color: rgba(var(--accent-rgb),0.35); }
+  .project-image { position: relative; width: 100%; aspect-ratio: 16/11; overflow: hidden; background: var(--dark); }
+  .project-image img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.25,0.1,0.25,1); }
+  .project-card:hover .project-image img { transform: scale(1.06); }
+  .project-image::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, transparent 60%, rgba(10,7,7,0.55) 100%); pointer-events: none; }
+  .project-badge { position: absolute; top: 12px; right: 12px; background: var(--accent); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 800; font-size: 9px; letter-spacing: 1.2px; text-transform: uppercase; padding: 6px 12px; z-index: 2; clip-path: polygon(0 0, calc(100% - 6px) 0, 100% 6px, 100% 100%, 6px 100%, 0 calc(100% - 6px)); }
+  .project-body { padding: 20px 22px 22px; display: flex; flex-direction: column; flex: 1; }
+  .project-title { font-family: 'Syne', sans-serif; font-weight: 800; font-size: 17px; color: var(--white); line-height: 1.25; margin-bottom: 10px; }
+  .project-desc { font-size: 13px; line-height: 1.6; color: var(--text); flex: 1; margin-bottom: 20px; }
+  .project-footer { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding-top: 18px; border-top: 1px solid var(--border); }
+  .project-client { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 1px; color: var(--muted); text-transform: uppercase; }
+  .project-btn { display: inline-flex; align-items: center; gap: 6px; background: transparent; border: 1px solid var(--border); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 11px; letter-spacing: 0.8px; text-transform: uppercase; padding: 9px 16px; text-decoration: none; transition: all 0.2s; white-space: nowrap; }
+  .project-btn:hover { border-color: var(--accent); color: var(--accent); background: rgba(var(--accent-rgb),0.08); }
 
   #about { background: var(--dark); }
   .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
@@ -110,25 +100,9 @@
   .about-highlight { margin-top: 40px; padding: 28px 32px; border: 1px solid var(--border); border-left: 3px solid var(--accent); background: var(--card); }
   .about-highlight p { font-family: 'DM Sans', sans-serif; font-style: italic; font-size: 17px; line-height: 1.7; color: var(--white); margin: 0; }
   .about-visual { position: relative; }
-  .about-big-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(80px, 10vw, 140px); line-height: 0.85; color: transparent; -webkit-text-stroke: 1px rgba(200,240,46,0.15); }
+  .about-big-text { font-family: 'Bebas Neue', sans-serif; font-size: clamp(80px, 10vw, 140px); line-height: 0.85; color: transparent; -webkit-text-stroke: 1px rgba(var(--accent-rgb),0.18); }
   .about-badge { position: absolute; bottom: 20px; right: 0; background: var(--accent); color: var(--black); padding: 20px 28px; font-family: 'Syne', sans-serif; font-weight: 800; font-size: 13px; letter-spacing: 1px; text-transform: uppercase; clip-path: polygon(0 0, calc(100% - 10px) 0, 100% 10px, 100% 100%, 10px 100%, 0 calc(100% - 10px)); }
   .about-badge span { display: block; font-size: 28px; font-family: 'Bebas Neue', sans-serif; letter-spacing: 0; }
-
-  #contact { background: var(--black); padding: 140px 60px; }
-  .contact-inner { max-width: 900px; margin: 0 auto; }
-  .contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(60px, 9vw, 120px); line-height: 0.9; margin-bottom: 40px; }
-  .contact-title .stroke { -webkit-text-stroke: 1px rgba(240,237,232,0.15); color: transparent; }
-  .contact-subtitle { font-size: 16px; color: var(--text); max-width: 480px; margin-bottom: 60px; line-height: 1.7; }
-  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; margin-bottom: 48px; }
-  .contact-item { background: var(--card); border: 1px solid var(--border); padding: 28px 32px; display: flex; align-items: center; gap: 20px; text-decoration: none; color: var(--white); transition: border-color 0.2s, transform 0.2s; position: relative; overflow: hidden; }
-  .contact-item::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 3px; background: var(--accent); transform: scaleY(0); transform-origin: bottom; transition: transform 0.3s; }
-  .contact-item:hover { border-color: rgba(200,240,46,0.3); transform: translateY(-2px); }
-  .contact-item:hover::before { transform: scaleY(1); }
-  .contact-icon { width: 48px; height: 48px; background: rgba(200,240,46,0.08); border: 1px solid rgba(200,240,46,0.2); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
-  .contact-icon svg { width: 22px; height: 22px; fill: var(--accent); }
-  .contact-info { display: flex; flex-direction: column; gap: 4px; }
-  .contact-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
-  .contact-value { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 15px; color: var(--white); }
 
   footer { background: var(--dark); border-top: 1px solid var(--border); padding: 32px 60px; display: flex; justify-content: space-between; align-items: center; position: relative; z-index: 2; }
   footer p { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
@@ -142,6 +116,74 @@
   .reveal-delay-3 { transition-delay: 0.3s; }
   .reveal-delay-4 { transition-delay: 0.4s; }
 
+  a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+
+  .whatsapp-float { position: fixed; right: 28px; bottom: 28px; width: 58px; height: 58px; background: #25D366; border-radius: 50%; display: flex; align-items: center; justify-content: center; z-index: 200; box-shadow: 0 8px 24px rgba(0,0,0,0.45), 0 0 0 rgba(37,211,102,0.6); text-decoration: none; transition: transform 0.2s ease, box-shadow 0.2s ease; animation: whatsapp-pulse 2.4s ease-in-out infinite; }
+  .whatsapp-float svg { width: 30px; height: 30px; fill: #fff; }
+  .whatsapp-float:hover { transform: scale(1.08); box-shadow: 0 10px 30px rgba(0,0,0,0.5); }
+  @keyframes whatsapp-pulse { 0%,100% { box-shadow: 0 8px 24px rgba(0,0,0,0.45), 0 0 0 0 rgba(37,211,102,0.5); } 50% { box-shadow: 0 8px 24px rgba(0,0,0,0.45), 0 0 0 10px rgba(37,211,102,0); } }
+
+  /* Project detail modal */
+  .project-modal-overlay { position: fixed; inset: 0; background: rgba(5,3,3,0.86); backdrop-filter: blur(8px); z-index: 300; display: flex; align-items: center; justify-content: center; padding: 40px 20px; opacity: 0; pointer-events: none; transition: opacity 0.3s ease; }
+  .project-modal-overlay.active { opacity: 1; pointer-events: auto; }
+  .project-modal { background: var(--dark); border: 1px solid var(--border); max-width: 760px; width: 100%; max-height: 88vh; overflow-y: auto; position: relative; }
+  .project-modal-close { position: absolute; top: 16px; right: 16px; width: 38px; height: 38px; border-radius: 50%; background: rgba(10,7,7,0.75); border: 1px solid var(--border); color: var(--white); font-size: 16px; display: flex; align-items: center; justify-content: center; cursor: pointer; z-index: 5; transition: border-color 0.2s, color 0.2s; }
+  .project-modal-close:hover { border-color: var(--accent); color: var(--accent); }
+  .project-modal-cover { width: 100%; aspect-ratio: 16/9; object-fit: cover; display: block; background: var(--card); }
+  .project-modal-body { padding: 32px 36px 40px; }
+  .project-modal-badge { display: inline-block; background: var(--accent); color: var(--black); font-family: 'Syne', sans-serif; font-weight: 800; font-size: 10px; letter-spacing: 1.5px; text-transform: uppercase; padding: 6px 14px; margin-bottom: 16px; }
+  .project-modal-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(28px, 4vw, 40px); line-height: 1.05; margin-bottom: 8px; }
+  .project-modal-client { font-family: 'Syne', sans-serif; font-weight: 600; font-size: 12px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+  .project-modal-section { margin-top: 26px; }
+  .project-modal-section h4 { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-bottom: 10px; }
+  .project-modal-section p { font-size: 14px; line-height: 1.75; color: var(--text); }
+  .project-modal-section ul { padding-left: 18px; }
+  .project-modal-section li { font-size: 14px; line-height: 1.75; color: var(--text); margin-bottom: 6px; }
+  .project-modal-section li strong { color: var(--white); font-weight: 600; }
+
+  .project-modal-slides-label { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 13px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--accent); margin-top: 32px; margin-bottom: 14px; }
+  .project-modal-slides { position: relative; }
+  .project-modal-slide-track { aspect-ratio: 16/9; overflow: hidden; position: relative; background: var(--card); border: 1px solid var(--border); }
+  .project-modal-slide-track img { width: 100%; height: 100%; object-fit: cover; display: none; }
+  .project-modal-slide-track img.active { display: block; }
+  .slide-arrow { position: absolute; top: 50%; transform: translateY(-50%); width: 40px; height: 40px; border-radius: 50%; background: rgba(10,7,7,0.7); border: 1px solid var(--border); color: var(--white); display: flex; align-items: center; justify-content: center; cursor: pointer; font-size: 18px; transition: border-color 0.2s, color 0.2s; z-index: 2; }
+  .slide-arrow:hover { border-color: var(--accent); color: var(--accent); }
+  .slide-arrow.prev { left: 12px; }
+  .slide-arrow.next { right: 12px; }
+  .slide-dots { display: flex; gap: 8px; justify-content: center; margin-top: 14px; }
+  .slide-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--border); cursor: pointer; border: none; padding: 0; }
+  .slide-dot.active { background: var(--accent); }
+
+  .project-modal-posts { display: flex; gap: 12px; margin-top: 32px; flex-wrap: wrap; }
+  .project-modal-posts a { flex: 1; min-width: 140px; text-align: center; background: transparent; border: 1px solid var(--border); color: var(--white); font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1px; text-transform: uppercase; padding: 14px 16px; text-decoration: none; transition: all 0.2s; }
+  .project-modal-posts a:hover { border-color: var(--accent); color: var(--accent); background: rgba(var(--accent-rgb),0.08); }
+
+  .project-modal-pdf-preview { margin-top: 32px; }
+  .project-modal-pdf-preview img {
+    width: 100%;
+    border: 1px solid var(--border);
+    display: block;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+  }
+  .project-modal-pdf-preview img:hover { opacity: 0.85; }
+
+  @media (max-width: 768px) {
+    .whatsapp-float { right: 18px; bottom: 18px; width: 52px; height: 52px; }
+    .whatsapp-float svg { width: 26px; height: 26px; }
+    .project-modal-body { padding: 24px 20px 30px; }
+    .project-modal-posts { flex-direction: column; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; scroll-behavior: auto !important; }
+    .reveal { opacity: 1; transform: none; }
+  }
+
+  @media (max-width: 1000px) {
+    .projects-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+
   @media (max-width: 768px) {
     nav { padding: 20px 24px; }
     .nav-links { display: none; }
@@ -154,19 +196,59 @@
     .stat:nth-child(odd) { border-right: 1px solid var(--border); }
     .stat:nth-child(n+3) { border-top: 1px solid var(--border); }
     .projects-grid { grid-template-columns: 1fr; }
-    .project-card.col-7, .project-card.col-5, .project-card.col-4, .project-card.col-8 { grid-column: span 1; }
     .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .contact-grid { grid-template-columns: 1fr; }
     footer { flex-direction: column; gap: 16px; text-align: center; }
-    .pdf-btns { width: 100%; }
-    .pdf-btn { flex: 1; }
+  }
+
+  /* ---- Contact section ---- */
+  #contact { background: var(--black); padding: 140px 60px 100px; overflow: hidden; }
+  .contact-inner { max-width: 1180px; margin: 0 auto; position: relative; }
+  .contact-watermark { position: absolute; top: -40px; right: -20px; font-family: 'Bebas Neue', sans-serif; font-size: clamp(140px, 18vw, 260px); line-height: 1; color: transparent; -webkit-text-stroke: 1px rgba(240,237,232,0.05); letter-spacing: -2px; z-index: 0; pointer-events: none; user-select: none; }
+  .contact-status { display: inline-flex; align-items: center; gap: 10px; margin-bottom: 28px; padding: 8px 16px 8px 12px; border: 1px solid var(--border); background: var(--card); font-family: 'Syne', sans-serif; font-weight: 600; font-size: 11px; letter-spacing: 1.5px; text-transform: uppercase; color: var(--text); }
+  .contact-status-dot { width: 7px; height: 7px; border-radius: 50%; background: #3ddc84; box-shadow: 0 0 0 0 rgba(61,220,132,0.6); animation: status-pulse 2s ease-in-out infinite; flex-shrink: 0; }
+  @keyframes status-pulse { 0% { box-shadow: 0 0 0 0 rgba(61,220,132,0.55); } 70% { box-shadow: 0 0 0 7px rgba(61,220,132,0); } 100% { box-shadow: 0 0 0 0 rgba(61,220,132,0); } }
+  .contact-layout { position: relative; z-index: 1; display: grid; grid-template-columns: 1.05fr 0.95fr; gap: 0; border-top: 1px solid var(--border); }
+  .contact-lead { padding: 56px 64px 56px 0; border-right: 1px solid var(--border); display: flex; flex-direction: column; justify-content: center; }
+  .contact-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(52px, 6vw, 92px); line-height: 0.95; margin-bottom: 28px; }
+  .contact-title .stroke { -webkit-text-stroke: 1px rgba(240,237,232,0.18); color: transparent; }
+  .contact-subtitle { font-size: 16px; color: var(--text); max-width: 420px; margin-bottom: 40px; line-height: 1.75; }
+  .contact-cta-row { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+  .contact-lead .btn-primary { padding: 18px 34px; }
+  .contact-alt-link { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 12px; letter-spacing: 1.2px; text-transform: uppercase; color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 8px; border-bottom: 1px solid transparent; padding-bottom: 2px; transition: color 0.2s, border-color 0.2s; }
+  .contact-alt-link:hover { color: var(--white); border-color: var(--accent); }
+
+  .contact-channels { display: flex; flex-direction: column; padding-left: 64px; margin-top: 20px;}
+  .contact-row { display: flex; align-items: center; gap: 20px; padding: 26px 0; border-bottom: 1px solid var(--border); text-decoration: none; color: var(--white); position: relative; transition: padding-left 0.25s ease; }
+  .contact-row:first-child { padding-top: 4px; }
+  .contact-row::before { content: ''; position: absolute; left: -64px; top: 0; bottom: -1px; width: 2px; background: var(--accent); transform: scaleY(0); transform-origin: top; transition: transform 0.3s cubic-bezier(0.25,0.1,0.25,1); }
+  .contact-row:hover { padding-left: 10px; }
+  .contact-row:hover::before { transform: scaleY(1); }
+  .contact-index { font-family: 'Bebas Neue', sans-serif; font-size: 14px; color: var(--muted); width: 22px; flex-shrink: 0; }
+  .contact-row-body { display: flex; flex-direction: column; gap: 4px; flex: 1; min-width: 0; }
+  .contact-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+  .contact-value { font-family: 'Syne', sans-serif; font-weight: 700; font-size: 19px; color: var(--white); transition: color 0.2s; }
+  .contact-row:hover .contact-value { color: var(--accent); }
+  .contact-arrow { width: 34px; height: 34px; border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; flex-shrink: 0; color: var(--muted); transition: all 0.25s ease; }
+  .contact-arrow svg { width: 14px; height: 14px; transition: transform 0.25s ease; }
+  .contact-row:hover .contact-arrow { border-color: var(--accent); color: var(--accent); background: rgba(var(--accent-rgb),0.08); }
+  .contact-row:hover .contact-arrow svg { transform: translate(2px, -2px); }
+
+  @media (max-width: 900px) {
+    .contact-watermark { display: none; }
+    .contact-layout { grid-template-columns: 1fr; }
+    .contact-lead { padding: 0 0 40px; border-right: none; border-bottom: 1px solid var(--border); }
+    .contact-channels { padding-left: 0; padding-top: 8px; }
+    .contact-row::before { left: -24px; }
+    .contact-row:hover { padding-left: 8px; }
+  }
+
+  @media (max-width: 768px) {
+    #contact { padding: 100px 24px 70px; }
+    .contact-value { font-size: 16px; }
   }
 </style>
 </head>
 <body>
-
-<div class="cursor" id="cursor"></div>
-<div class="cursor-ring" id="cursorRing"></div>
 
 <nav id="navbar">
   <a href="#" class="nav-logo">YM<span>.</span></a>
@@ -187,15 +269,15 @@
       <span class="outline">YOSSEF</span><br>
       <span>MOHA<span class="accent">M</span>MED</span>
     </h1>
-    <p class="hero-sub reveal reveal-delay-2">Multi-skilled Content creator</p>
+    <p class="hero-sub reveal reveal-delay-2">Marketing Specialist & Strategist</p>
     <p class="hero-bio reveal reveal-delay-3">
-      Obsessed with the intersection of <em>clear strategy</em> and <em>powerful visual storytelling</em>. I build data-backed content plans that transform how brands communicate, connect, and grow online.
+      Obsessed with the intersection of <em>data-backed strategy</em> and <em>conversion-driven storytelling</em>.  I build scalable marketing systems and full-funnel strategies that convert attention into measurable growth.
     </p>
     <a href="#work" class="btn-primary reveal reveal-delay-4">View Work →</a>
   </div>
   <div class="hero-photo-wrap reveal reveal-delay-2">
     <div class="hero-photo-frame">
-      <img class="hero-photo" src="youssef-mohammed.jpeg" alt="Yossef Mohammed">
+      <img class="hero-photo" src="./images/my-photo.jpeg" alt="Yossef Mohammed">
       <div class="hero-photo-badge">
         <span>100%</span>
         Strategy Driven
@@ -205,7 +287,7 @@
 </section>
 
 <div class="stats-bar reveal">
-  <div class="stat"><div class="stat-num">3+</div><div class="stat-label">Brands Served</div></div>
+  <div class="stat"><div class="stat-num">15+</div><div class="stat-label">Brands Served</div></div>
   <div class="stat"><div class="stat-num">10+</div><div class="stat-label">Skills Mastered</div></div>
   <div class="stat"><div class="stat-num">∞</div><div class="stat-label">Story Angles</div></div>
   <div class="stat"><div class="stat-num">100%</div><div class="stat-label">Strategy-First</div></div>
@@ -215,16 +297,16 @@
   <div class="section-label reveal">What I Bring</div>
   <h2 class="section-title reveal">CORE <span class="dim">SKILLS</span></h2>
   <div class="skills-grid">
-    <div class="skill-item reveal reveal-delay-1"><div class="skill-name">Content Strategy & Planning</div><div class="skill-num">01</div></div>
-    <div class="skill-item reveal reveal-delay-2"><div class="skill-name">Copywriting & Storytelling</div><div class="skill-num">02</div></div>
-    <div class="skill-item reveal reveal-delay-3"><div class="skill-name">Audience Research & Personas</div><div class="skill-num">03</div></div>
-    <div class="skill-item reveal reveal-delay-4"><div class="skill-name">Content Calendar Management</div><div class="skill-num">04</div></div>
-    <div class="skill-item reveal reveal-delay-1"><div class="skill-name">Brand Identity & Tone of Voice</div><div class="skill-num">05</div></div>
-    <div class="skill-item reveal reveal-delay-2"><div class="skill-name">Competitor Analysis</div><div class="skill-num">06</div></div>
-    <div class="skill-item reveal reveal-delay-3"><div class="skill-name">Social Media Analytics & Insights</div><div class="skill-num">07</div></div>
-    <div class="skill-item reveal reveal-delay-4"><div class="skill-name">Short-Form Video Concepting</div><div class="skill-num">08</div></div>
-    <div class="skill-item reveal reveal-delay-1"><div class="skill-name">Organic Growth Optimization</div><div class="skill-num">09</div></div>
-    <div class="skill-item reveal reveal-delay-2"><div class="skill-name">Visual Storytelling</div><div class="skill-num">10</div></div>
+    <div class="skill-item reveal reveal-delay-1"><div class="skill-name">Content & Inbound Strategy</div><div class="skill-num">01</div></div>
+    <div class="skill-item reveal reveal-delay-2"><div class="skill-name">Direct-Response Copywriting</div><div class="skill-num">02</div></div>
+    <div class="skill-item reveal reveal-delay-3"><div class="skill-name">Conversion Rate Optimization (CRO)</div><div class="skill-num">03</div></div>
+    <div class="skill-item reveal reveal-delay-4"><div class="skill-name"> Audience Research & Shopping Personas</div><div class="skill-num">04</div></div>
+    <div class="skill-item reveal reveal-delay-1"><div class="skill-name">Meta & Google Ads Scaling</div><div class="skill-num">05</div></div>
+    <div class="skill-item reveal reveal-delay-2"><div class="skill-name">E-Commerce & Cart Recovery Strategy</div><div class="skill-num">06</div></div>
+    <div class="skill-item reveal reveal-delay-3"><div class="skill-name">Short-Form Video Concepting</div><div class="skill-num">07</div></div>
+    <div class="skill-item reveal reveal-delay-4"><div class="skill-name">Performance & Campaign Analytics</div><div class="skill-num">08</div></div>
+    <div class="skill-item reveal reveal-delay-1"><div class="skill-name">Brand Positioning & Competitor Audit</div><div class="skill-num">09</div></div>
+    <div class="skill-item reveal reveal-delay-2"><div class="skill-name">Funnel Building & Lead Nurturing</div><div class="skill-num">10</div></div>
   </div>
 </section>
 
@@ -233,94 +315,106 @@
   <h2 class="section-title reveal">MY <span class="dim">WORK</span></h2>
   <div class="projects-grid">
 
-    <!-- CARD 01 -->
-    <div class="project-card col-7 clickable reveal" data-link="bassant-ahmed.pdf">
-      <div class="project-num">01</div>
-      <div>
-        <div class="project-tag">Content Strategy · Creator Plan</div>
-        <h3 class="project-title">Bassant Ahmed — Full Content Plan</h3>
-        <p class="project-desc">Developed a comprehensive 16+ reel content strategy covering Outdoor Vlogs, Lifestyle Series, Artistic Location shoots, and Home Series. Scripted voiceovers, defined moods, execution styles, and location scouting for each episode.</p>
+    <div class="project-card reveal" data-project="raya">
+      <div class="project-image">
+        <img src="./images/raya.jpeg" alt="Raya Auto Marketing Strategy" loading="lazy">
+        <span class="project-badge">Full Case Study</span>
       </div>
-      <div class="project-meta">
-        <span class="project-client">@bassant_ahmmeed</span>
-        <div class="project-arrow">↗</div>
+      <div class="project-body">
+        <h3 class="project-title">Raya Auto</h3>
+        <p class="project-desc">Architected an end-to-end digital strategy, technical SEO revamp, and multi-channel content engine bridging B2B operational needs with B2C luxury lifestyle.</p>
+        <div class="project-footer">
+          <span class="project-client">Raya Auto</span>
+          <button type="button" class="project-btn">View Case Study ↗</button>
+        </div>
       </div>
-      <div class="project-accent-bar"></div>
     </div>
 
-    <!-- CARD 02 — J-FUEL -->
-    <div class="project-card col-5 clickable reveal reveal-delay-1" data-link="jfuel_Website Banners.pdf">
-      <div class="project-num">02</div>
-      <div>
-        <div class="project-tag">Brand Strategy · Web Content</div>
-        <h3 class="project-title">J-Fuel Supplements — Website Banners</h3>
-        <p class="project-desc">Crafted bold website banner concepts for a supplements brand — Fat Loss, Focus & Clarity, and Performance. Developed headlines, subtext, and detailed visual direction for each campaign banner.</p>
+    <div class="project-card reveal reveal-delay-1" data-project="foodBank">
+      <div class="project-image">
+        <img src="./images/bank.jpeg" alt="Egyptian Food Bank" loading="lazy">
+        <span class="project-badge">Full Case Study</span>
       </div>
-      <div class="project-meta">
-        <span class="project-client">@jfuel_supplements</span>
-        <div class="project-arrow">↗</div>
+      <div class="project-body">
+        <h3 class="project-title">Egyptian Food Bank</h3>
+        <p class="project-desc">Executed an end-to-end digital strategy from A to Z, managing donor journey architecture, inbound funnel optimization, creative campaign direction, and conversion messaging to maximize sustainable donations.</p>
+        <div class="project-footer">
+          <span class="project-client">Egyptian Food Bank</span>
+          <button type="button" class="project-btn">View Case Study ↗</button>
+        </div>
       </div>
-      <div class="project-accent-bar"></div>
     </div>
 
-    <!-- CARD 03 -->
-    <div class="project-card col-4 clickable reveal reveal-delay-2" data-link="content-uf.pdf">
-      <div class="project-num">03</div>
-      <div>
-        <div class="project-tag">Copywriting · Social Media</div>
-        <h3 class="project-title">Sample Content Reels — U First Agency</h3>
-        <p class="project-desc">Wrote strategic captions and CTAs for 5 social videos for a marketing agency. Sharp messaging designed to convert and build brand authority.</p>
+    <div class="project-card reveal reveal-delay-2" data-project="nephorie">
+      <div class="project-image">
+        <img src="./images/nephorie.jpeg" alt="nephorie" loading="lazy">
+        <span class="project-badge"> ⁠E-COMMERCE GROWTH⁠</span>
       </div>
-      <div class="project-meta">
-        <span class="project-client">U First Agency</span>
-        <div class="project-arrow">↗</div>
+      <div class="project-body">
+        <h3 class="project-title">Néphorie – Luxury perfumes</h3>
+        <p class="project-desc">Designed conversion-driven content strategies and sensory ad angles for a luxury fragrance brand, optimizing product positioning to lower customer acquisition cost (CAC) and boost direct e-commerce sales.</p>
+        <div class="project-footer">
+          <span class="project-client">nephorie</span>
+          <button type="button" class="project-btn">View Case Study ↗</button>
+        </div>
       </div>
-      <div class="project-accent-bar"></div>
     </div>
 
-    <!-- CARD 04 — Pharaoh Wear Content Grid -->
-    <div class="project-card col-4 clickable reveal reveal-delay-3" data-link="Content_Grid_for_Pharaoh_Wear__Pyramids_Shooting__.pdf">
-      <div class="project-num">04</div>
-      <div>
-        <div class="project-tag">Creative Direction · Fashion Brand</div>
-        <h3 class="project-title">Pharaoh Wear — Content Grid</h3>
-        <p class="project-desc">Developed a full content grid for a fashion brand shoot at the Pyramids of Giza. Covered visual direction, shot descriptions, and BTS strategy.</p>
+    <div class="project-card reveal reveal-delay-3" data-project="ohoud">
+      <div class="project-image">
+        <img src="./images/3hood.jpeg" alt="Ohoud Weddings & Events Planner" loading="lazy">
+        <span class="project-badge">Full Case Study</span>
       </div>
-      <div class="project-meta">
-        <span class="project-client">Pharaoh Wear</span>
-        <div class="project-arrow">↗</div>
+      <div class="project-body">
+        <h3 class="project-title">Ohoud Wedding & Event Planner</h3>
+        <p class="project-desc">Managed end-to-end digital operations from A to Z, executing targeted Meta ad campaigns, high-ticket content strategy, and lead generation funnels to acquire premium wedding and event clients.</p>
+        <div class="project-footer">
+          <span class="project-client">Ohoud Weddings & Events Planner</span>
+          <button type="button" class="project-btn">View Case Study ↗</button>
+        </div>
       </div>
-      <div class="project-accent-bar"></div>
     </div>
-
-    <!-- CARD 05 — Pharaoh Wear Creative Reels -->
-    <div class="project-card col-4 clickable reveal reveal-delay-4" data-link="creative_for__Pharaoh_Wear_.pdf">
-      <div class="project-num">05</div>
-      <div>
-        <div class="project-tag">Reel Concepting · Fashion Brand</div>
-        <h3 class="project-title">Pharaoh Wear — Creative Reels</h3>
-        <p class="project-desc">Scripted cinematic reel concepts blending cultural identity with modern storytelling — including captions, brand tone, and visual direction for each reel.</p>
-      </div>
-      <div class="project-meta">
-        <span class="project-client">Pharaoh Wear</span>
-        <div class="project-arrow">↗</div>
-      </div>
-      <div class="project-accent-bar"></div>
+<div class="project-card reveal reveal-delay-3" data-project="jfuel">
+  <div class="project-image">
+    <img src="./images/jfuel.jpeg" alt="JFuel Supplements" loading="lazy">
+    <span class="project-badge">E-COMMERCE GROWTH⁠</span>
+  </div>
+  <div class="project-body">
+    <h3 class="project-title">J-Fuel Supplements</h3>
+    <p class="project-desc">Designed product-focused content strategies and high-converting website banners for a fitness brand, driving audience engagement and boosting direct e-commerce sales.</p>
+    <div class="project-footer">
+      <span class="project-client">JFuel</span>
+      <button type="button" class="project-btn">View Case Study ↗</button>
     </div>
-
-    <!-- CARD 06 — Dr. Amr Arafa Pharmacy -->
-    <div class="project-card col-8 clickable reveal reveal-delay-1" data-link="CONTENT PLAN WEEK 16_5 pharmacey d_ amr .pdf">
-      <div class="project-num">06</div>
-      <div>
-        <div class="project-tag">Content Strategy · Pharmacy</div>
-        <h3 class="project-title">Dr. Amr Arafa Pharmacy — Weekly Content Plan</h3>
-        <p class="project-desc">Built a full weekly content plan for a pharmacy brand — including Reels, promotional Posts, and Stories. Covered hair care product launches, brand offers, and seasonal content with captions and CTAs.</p>
+  </div>
+</div>
+    <div class="project-card reveal reveal-delay-3" data-project="sos">
+      <div class="project-image">
+        <img src="./images/sos.jpeg" alt="SOS Children’s Villages Egypt" loading="lazy">
+        <span class="project-badge">Full Case Study</span>
       </div>
-      <div class="project-meta">
-        <span class="project-client">Dr. Amr Arafa Pharmacy</span>
-        <div class="project-arrow">↗</div>
+      <div class="project-body">
+        <h3 class="project-title">SOS Children’s Villages Egypt</h3>
+  <p class="project-desc">Managed end-to-end digital marketing operations from A to Z, architecting seasonal donation campaigns, content engine, and inbound conversion funnels to drive sustainable digital donor acquisition.</p>
+        <div class="project-footer">
+          <span class="project-client">SOS</span>
+          <button type="button" class="project-btn">View Case Study ↗</button>
+        </div>
       </div>
-      <div class="project-accent-bar"></div>
+    </div>
+    <div class="project-card reveal reveal-delay-3" data-project="ibrand">
+      <div class="project-image">
+        <img src="./images/i-brand.jpeg" alt="iBrand KSA — E-Commerce Digital Strategy & Growth Plan" loading="lazy">
+        <span class="project-badge">E-COMMERCE GROWTH AUDIT</span>
+      </div>
+      <div class="project-body">
+        <h3 class="project-title">iBrand KSA — E-Commerce Digital Strategy & Growth Plan</h3>
+        <p class="project-desc">Executed an end-to-end e-commerce audit and growth strategy, optimizing store conversion readiness, audience segmentation by shopping missions, Meta/Google ad structures, and automated cart recovery engines.</p>
+        <div class="project-footer">
+          <span class="project-client">iBrand KSA</span>
+          <button type="button" class="project-btn">View Case Study ↗</button>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -331,15 +425,18 @@
     <div class="about-text">
       <div class="section-label reveal">Who I Am</div>
       <h2 class="section-title reveal" style="margin-bottom: 32px;">ABOUT <span class="dim">ME</span></h2>
-      <p class="reveal">I'm <strong>Yossef Mohammed</strong>, a Content Creator & Strategist who believes great content is never an accident — it's the result of sharp thinking, deep audience understanding, and intentional execution.</p>
-      <p class="reveal reveal-delay-1">I work with brands to build <strong>data-backed content ecosystems</strong> — from strategy and planning all the way through to visual storytelling and social performance.</p>
-      <p class="reveal reveal-delay-2">Whether it's a full content calendar, brand tone of voice, short-form video concepting, or organic growth strategy, I approach every brief with the same obsession: <strong>making content that actually does something</strong>.</p>
+      <p class="reveal">Performance-driven strategist specializing in full-funnel marketing, conversion rate optimization (CRO), and digital acquisition.
+Full-Funnel Strategy: Designing end-to-end customer journeys using Inbound methodologies to increase retention and lifetime value.
+
+Performance & Scaling: Diagnosing funnel bottlenecks, optimizing landing pages, and executing Meta/Google campaigns targeted at scalable ROAS.
+
+Strategic Positioning: Transforming brand messaging into direct-response assets that lower acquisition costs and build habit-forming carts.</p>
       <div class="about-highlight reveal reveal-delay-3">
-        <p>"The best content doesn't feel like content — it feels like a conversation your audience was already waiting to have."</p>
+        <p>"Great marketing isn't about getting attention—it's about building scalable systems that convert attention into revenue."</p>
       </div>
     </div>
     <div class="about-visual reveal">
-      <div class="about-big-text">CONTENT<br>FIRST.<br>ALWAYS.</div>
+      <div class="about-big-text">DATA.<br>CREATIVE.<br>GROWTH.</div>
       <div class="about-badge"><span>100%</span>Strategy Driven</div>
     </div>
   </div>
@@ -347,50 +444,62 @@
 
 <section id="contact">
   <div class="contact-inner">
+    <div class="contact-watermark" aria-hidden="true">CONNECT</div>
+
     <div class="section-label reveal">Let's Work Together</div>
-    <h2 class="contact-title reveal">
-      GOT A<br>
-      <span class="stroke">PROJECT</span><br>
-      IN MIND?
-    </h2>
-    <p class="contact-subtitle reveal">Whether you need a full content strategy, creative direction, or just want to talk shop — I'm all ears. Reach out through any of the channels below.</p>
-    <div class="contact-grid reveal reveal-delay-1">
-      <a href="mailto:ym368642@gmail.com" class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
+    <div class="contact-status reveal">
+      <span class="contact-status-dot"></span>
+      Available for new projects
+    </div>
+
+    <div class="contact-layout">
+      <div class="contact-lead reveal">
+        <h2 class="contact-title">
+          GOT A<br>
+          <span class="stroke">PROJECT</span><br>
+          IN MIND?
+        </h2>
+        <p class="contact-subtitle">Looking to scale your brand with data-backed strategies and high-converting campaigns? Let's talk — pick a channel and I'll get back to you fast.</p>
+        <div class="contact-cta-row">
+          <a href="mailto:ym368642@gmail.com" class="btn-primary">Start a Conversation →</a>
+          <a href="https://wa.me/201005703755" target="_blank" rel="noopener" class="contact-alt-link">Or message on WhatsApp</a>
         </div>
-        <div class="contact-info">
-          <span class="contact-label">Email</span>
-          <span class="contact-value">ym368642@gmail.com</span>
-        </div>
-      </a>
-      <a href="tel:+201005703755" class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.25 1.02l-2.2 2.2z"/></svg>
-        </div>
-        <div class="contact-info">
-          <span class="contact-label">Phone</span>
-          <span class="contact-value">01005703755</span>
-        </div>
-      </a>
-      <a href="https://www.linkedin.com/in/yossef-muhammad-9892b9367" target="_blank" rel="noopener" class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
-        </div>
-        <div class="contact-info">
-          <span class="contact-label">LinkedIn</span>
-          <span class="contact-value">yossef-muhammad</span>
-        </div>
-      </a>
-      <a href="https://www.instagram.com/useiiif_4" target="_blank" rel="noopener" class="contact-item">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg>
-        </div>
-        <div class="contact-info">
-          <span class="contact-label">Instagram</span>
-          <span class="contact-value">@useiiif_4</span>
-        </div>
-      </a>
+      </div>
+
+      <div class="contact-channels reveal reveal-delay-1">
+        <a href="mailto:ym368642@gmail.com" class="contact-row">
+          <span class="contact-index">01</span>
+          <span class="contact-row-body">
+            <span class="contact-label">Email</span>
+            <span class="contact-value">Send an email</span>
+          </span>
+          <span class="contact-arrow"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </a>
+        <a href="https://wa.me/201005703755" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-index">02</span>
+          <span class="contact-row-body">
+            <span class="contact-label">WhatsApp</span>
+            <span class="contact-value">01005703755</span>
+          </span>
+          <span class="contact-arrow"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </a>
+        <a href="https://www.linkedin.com/in/yossef-muhammed-9892b9367?utm_source=share_via&utm_content=profile&utm_medium=member_ios" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-index">03</span>
+          <span class="contact-row-body">
+            <span class="contact-label">LinkedIn</span>
+            <span class="contact-value">yossef-muhammad</span>
+          </span>
+          <span class="contact-arrow"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </a>
+        <a href="https://www.instagram.com/useiiif4_4?igsi=MWV0bWQyaTM2dWNpdA%3D%3D&utm_source=qr" target="_blank" rel="noopener" class="contact-row">
+          <span class="contact-index">04</span>
+          <span class="contact-row-body">
+            <span class="contact-label">Instagram</span>
+            <span class="contact-value">@useiiif_4</span>
+          </span>
+          <span class="contact-arrow"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="7" y1="17" x2="17" y2="7"/><polyline points="7 7 17 7 17 17"/></svg></span>
+        </a>
+      </div>
     </div>
   </div>
 </section>
@@ -398,41 +507,363 @@
 <footer>
   <p>© 2026 Yossef Mohammed. All rights reserved.</p>
   <div class="footer-logo">YM<span>.</span></div>
-  <p>Content Creator & Strategist</p>
+  <p>Marketing Specialist & Strategist</p>
 </footer>
 
-<script>
-  const cursor = document.getElementById('cursor');
-  const cursorRing = document.getElementById('cursorRing');
-  document.addEventListener('mousemove', e => {
-    cursor.style.left = e.clientX - 6 + 'px';
-    cursor.style.top = e.clientY - 6 + 'px';
-    cursorRing.style.left = e.clientX - 20 + 'px';
-    cursorRing.style.top = e.clientY - 20 + 'px';
-  });
-  document.querySelectorAll('a, button, .project-card, .skill-item, .contact-item').forEach(el => {
-    el.addEventListener('mouseenter', () => cursor.style.transform = 'scale(2.5)');
-    el.addEventListener('mouseleave', () => cursor.style.transform = 'scale(1)');
-  });
+<a href="https://wa.me/201005703755" target="_blank" rel="noopener" class="whatsapp-float" aria-label="Chat on WhatsApp">
+  <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg"><path d="M16.001 2.667c-7.363 0-13.334 5.97-13.334 13.333 0 2.351.615 4.646 1.782 6.667l-1.892 6.912a1 1 0 0 0 1.226 1.226l6.912-1.892a13.27 13.27 0 0 0 6.667 1.782h.001c7.362 0 13.333-5.97 13.333-13.333s-5.97-13.333-13.334-13.333zm0 24.278h-.001a10.9 10.9 0 0 1-5.826-1.679l-.417-.256-4.313 1.181 1.181-4.312-.256-.417a10.9 10.9 0 0 1-1.679-5.826c0-6.026 4.906-10.932 10.932-10.932 6.025 0 10.931 4.906 10.931 10.932 0 6.025-4.906 10.931-10.932 10.931zm5.995-8.187c-.328-.164-1.94-.957-2.24-1.067-.301-.11-.52-.164-.74.164-.219.328-.848 1.067-1.04 1.286-.192.219-.383.246-.71.082-.328-.164-1.386-.511-2.64-1.63-.976-.87-1.635-1.945-1.827-2.273-.192-.328-.02-.505.144-.668.148-.147.328-.383.492-.575.164-.192.219-.328.328-.547.11-.219.055-.41-.027-.575-.082-.164-.74-1.782-1.014-2.44-.267-.64-.539-.554-.74-.564-.192-.008-.41-.01-.63-.01-.219 0-.574.082-.876.41-.301.328-1.15 1.124-1.15 2.741 0 1.617 1.178 3.18 1.342 3.399.164.219 2.318 3.54 5.614 4.964.784.339 1.397.541 1.874.692.787.25 1.503.215 2.07.13.631-.094 1.94-.793 2.213-1.558.273-.766.273-1.422.191-1.558-.082-.137-.301-.219-.63-.383z"/></svg>
+</a>
 
+<div class="project-modal-overlay" id="projectModalOverlay">
+  <div class="project-modal" id="projectModal">
+    <button type="button" class="project-modal-close" id="projectModalClose" aria-label="Close">✕</button>
+    <img class="project-modal-cover" id="modalCover" src="" alt="">
+    <div class="project-modal-body">
+      <span class="project-modal-badge" id="modalBadge"></span>
+      <h3 class="project-modal-title" id="modalTitle"></h3>
+      <p class="project-modal-client" id="modalClient"></p>
+      <div id="modalSections"></div>
+
+      <div class="project-modal-slides-label">Examples of strategy and visual presentation</div>
+      <div class="project-modal-slides">
+        <div class="project-modal-slide-track" id="modalSlideTrack"></div>
+        <button type="button" class="slide-arrow prev" id="slidePrev" aria-label="Previous slide">‹</button>
+        <button type="button" class="slide-arrow next" id="slideNext" aria-label="Next slide">›</button>
+        <div class="slide-dots" id="slideDots"></div>
+      </div>
+
+      <div class="project-modal-posts" id="modalPosts"></div>
+
+      <div class="project-modal-pdf-preview" id="modalPdfPreview" style="display:none;">
+        <div class="project-modal-slides-label">Full Presentation</div>
+        <img id="modalPdfImage" src="" alt="Open full presentation">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
   const navbar = document.getElementById('navbar');
   window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 50));
-
   const reveals = document.querySelectorAll('.reveal');
   const observer = new IntersectionObserver(entries => {
     entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('visible'); });
   }, { threshold: 0.1, rootMargin: '0px 0px -60px 0px' });
   reveals.forEach(el => observer.observe(el));
-
   document.querySelectorAll('.hero .reveal').forEach((el, i) => {
     setTimeout(() => el.classList.add('visible'), 200 + i * 150);
   });
 
-  // Only clickable cards open PDF on full card click
-  document.querySelectorAll('.project-card.clickable[data-link]').forEach(card => {
-    card.addEventListener('click', () => {
-      window.open(card.getAttribute('data-link'), '_blank');
-    });
+  document.querySelectorAll('.project-card[data-project]').forEach(card => {
+    card.addEventListener('click', () => openProjectModal(card.getAttribute('data-project')));
+  });
+
+  // ---- Project modal system ----
+  const projectsData = {
+    raya: {
+      badge: 'Full Case Study',
+      title: 'Raya Auto — Marketing & Content Strategy Case Study',
+      client: 'Raya Auto · Role: Marketing Specialist & Strategist',
+      cover: './images/raya.jpeg',
+            slides: [
+  './images/raya-slide-1.jpeg',
+  './images/raya-slide-2.jpeg',
+  './images/raya-slide-3.jpeg',
+  './images/raya-slide-4.jpeg',
+  './images/raya-slide-5.jpeg',
+  './images/raya-slide-6.jpeg',
+  './images/raya-slide-7.jpeg',
+  './images/raya-slide-8.jpeg',
+  './images/raya-slide-9.jpeg',
+  './images/raya-slide-10.jpeg',
+  './images/raya-slide-11.jpeg',
+],
+      sections: [
+        { heading: 'Overview', text: ' Architected an end-to-end digital strategy, technical SEO revamp, and multi-channel content engine to bridge B2C luxury lifestyle with B2B operational needs.' },
+        { heading: 'The Challenge', list: [
+          '<strong>Inconsistent Messaging & Weak CTAs:</strong> Unstructured posting schedule with missing conversion pathways.',
+          '<strong>Technical & SEO Friction:</strong> Poor mobile performance (Score: 48) and fragmented Google Business profiles.',
+          '<strong>Positioning Gap:</strong> Golf carts were perceived solely as seasonal tools rather than year-round lifestyle and mobility assets.'
+        ]},
+        { heading: 'Strategic Execution', list: [
+          '<strong>SEO & GEO Optimization:</strong> Optimized Meta titles, improved site architecture, merged duplicate Google Maps locations, and set up targeted FAQ pages for Generative Engine Optimization (GEO).',
+          '<strong>Dual-Angle Positioning — B2C (Lifestyle & Prestige):</strong> Crafted campaigns under "Driving Moments That Matter" and "Luxury in Motion" to frame vehicles as daily necessity and status symbols.',
+          '<strong>Dual-Angle Positioning — B2B (Lead Gen):</strong> Built targeted LinkedIn funnels targeting facility managers in resorts, compounds, and universities.',
+          '<strong>Content Engine & UGC:</strong> Engineered seasonal roadmaps (2026 Calendar) and community-driven campaigns like #RideMyRoutine on TikTok to maximize dynamic engagement.'
+        ]},
+        { heading: 'Business Impact', list: [
+          'Transformed passive social reach into a structured B2C/B2B lead conversion engine.',
+          'Modernized the brand\'s digital presence to capture both luxury compound owners and enterprise decision-makers.'
+        ]}
+      ],
+      posts: [
+        { label: 'Post 1', url: 'https://www.instagram.com/p/DZvN4RKjaf7/?utm_source=ig_web_copy_link' },
+        { label: 'Post 2', url: 'https://www.instagram.com/reel/DbF172xmh7E/?utm_source=ig_web_copy_link' },
+        { label: 'Post 3', url: 'https://www.instagram.com/p/DbSuKlQjDJX/?utm_source=ig_web_copy_link' }
+      ]
+    },
+foodBank: {
+  badge: 'Full Case Study',
+  title: 'Egyptian Food Bank',
+  cover: './images/bank.jpeg',
+  slides: ['./images/bank-1.jpeg',
+            './images/bank-2.jpeg',
+            './images/bank-3.jpeg',
+            './images/bank-4.jpeg',
+            './images/bank-5.jpeg',
+            './images/bank-6.jpeg',
+            './images/bank-7.jpeg',
+            './images/bank-8.jpeg',
+            './images/bank-9.jpeg',
+            './images/bank-10.jpeg',
+  ],
+  sections: [
+    { 
+      heading: 'Overview & Executive Summary', 
+      text: 'Objective: Presenting the end-to-end performance execution for Egyptian Food Bank (June 2026 Campaigns), covering both Brand Engagement and High-Intent Conversion Objectives across Egypt and the UAE markets.' 
+    },
+    { 
+      heading: 'Core Key Performance Indicators (KPIs)', 
+      text: '1. Total Impressions: 6,281,259<br>2. Total Reach: 2,996,950 Unique Users<br>3. Total Engagements: 1,035,037 Interactions<br>4. Outbound Link Clicks: 41,552<br>5. Total Conversions (Donations): 1,859 Conversions' 
+    },
+    { 
+      heading: 'Strategic Highlights & Media Buying Execution', 
+      text: '<strong>Full-Funnel Orchestration:</strong> Split campaign architecture between top-of-funnel reach/engagement (driving trust and storytelling around programs like Free Mart and Tekyet El-Mahrusa) and bottom-of-funnel conversion campaigns optimized for donation completion.<br><br><strong>Creative Testing & Scaling:</strong> Deployed over 69 ad variations across Meta placements (Feed, Stories, Reels) testing micro-angle hooks (e.g., Orphan Sponsorship, Zakat Al-Maal, Water Connections, and Seasonal Sacrifices).<br><br><strong>Cross-Border Targeting:</strong> Successfully captured high-value GCC donors in the UAE market yielding a high conversion-to-click ratio.' 
+    }
+  ],
+  posts: [
+    { label: 'Post 1', url: 'https://www.facebook.com/share/p/19R4G4CGEL/' },
+    { label: 'Post 2', url: 'https://www.facebook.com/share/p/14mHrC1LLkJ/' },
+    { label: 'Post 3', url: 'https://www.facebook.com/share/p/1BhPikFs8J/' }
+  ]
+},
+nephorie: {
+  badge: '⁠E-COMMERCE GROWTH⁠',
+  title: 'Creative Pharaoh Wear',
+  client: 'Pharaoh Wear · Role: Marketing Specialist & Strategist',
+  cover: './images/nephorie.jpeg',
+  slides: [],
+  sections: [
+    { heading: 'Overview', text: 'Creative fashion-focused content direction blending cultural identity, storytelling, and modern social media strategy for Pharaoh Wear.' },
+    { heading: 'Post 1 — Quiet Luxury', list: [
+      '<strong>Target Audience:</strong> The A/A+ segment seeking "quiet luxury" and sophisticated, minimalist designs free from ostentation while valuing an aura of prestige and a distinctive appearance.',
+      '<strong>Objective:</strong> Build high brand awareness and establish a brand perception of luxury and understated elegance from the very first moment.',
+      '<strong>Visual Direction:</strong> Cinematic slow-motion shots; moody, low-key lighting to highlight textures and warm tones; wide-angle shots transitioning to close-ups that evoke a sense of calm and sophistication.',
+      '<strong>Creative Concept:</strong> Based on the principle of "Elegance in Simplicity" — leveraging simplicity and tranquility to capture attention amidst the clutter of direct, overt advertising.',
+      '<strong>Caption:</strong> "Make a statement without speaking. 1 in a 100." (Collaboration with @basselalzaro)',
+      '<a href="https://www.instagram.com/reel/DUOX0zQiB7e/?igsi=MXBiMThneDliNTVpYQ==" target="_blank" rel="noopener" class="project-btn">Go to Post ↗</a>'
+    ]},
+    { heading: 'Post 2', list: [
+      '<strong>Target Audience:</strong> Entrepreneurs, professionals, and high-net-worth influencers seeking a product that reflects their lifestyle and social status.',
+      '<strong>Objective:</strong> Increase consideration and high-intent inquiries, and associate the product with a distinctive, luxurious lifestyle.',
+      '<strong>Visual Direction:</strong> Visuals set in high-end venues with minimalist interiors.Dynamic framing that captures movement and the product in use during real-life situations (lifestyle framing). Clean, neutral color palette that aligns with the brands premium aesthetic.',
+      '<strong>Creative Concept:</strong> Selling a lifestyle, not just a product. Establishing a connection between the item and the viewers social status, allowing them to envision themselves within the scene.',
+      '<strong>Caption:</strong> My kind of ritual . My kind of signature. 1 in a 100(Collaboration with enjykiwan)',
+      '<a href="https://www.instagram.com/reel/DUOX9D1iLFy/?igsi=N3lxMmxnczExYTZj" target="_blank" rel="noopener" class="project-btn">Go to Post ↗</a>'
+    ]},
+    { heading: 'Post 3', list: [
+      '<strong>Target Audience:</strong> Detail-oriented buyers who value high quality and expert craftsmanship, and are willing to pay a premium for excellence.',
+      '<strong>Objective:</strong> Increase conversion rates and build trust by clearly demonstrating the true value that justifies the price.',
+      '<strong>Visual Direction:</strong> Macro and extreme close-up shots highlighting the finishing, stitching, and materials.Sharp, direct lighting that accentuates material textures and quality details.Fast, seamless transitions between intricate details to showcase the level of craftsmanship.',
+      '<strong>Creative Concept:</strong> Focus on craftsmanship and manufacturing precision to demonstrate that the price is a true reflection of tangible, superior quality.',
+      '<strong>Caption:</strong> The ritual matters as much as the scent itself.A few seconds of intention elevate how you enter the room.',
+      '<a href="https://www.instagram.com/reel/DYo-KQkuAS2/?igsi=MWgyN3AwZW96NGs1cA==" target="_blank" rel="noopener" class="project-btn">Go to Post ↗</a>'
+    ]}
+  ],
+  posts: []
+},
+ohoud: {
+  badge: 'Full Case Study',
+  title: 'Ohoud Weddings & Events Planner',
+  client: 'Ohoud Weddings & Events Planner · Role: Marketing Specialist & Strategist',
+  cover: './images/3hood.jpeg',
+  slides: [],
+  sections: [
+    { heading: 'Overview', text: 'Developed creative content for a wedding and events planning business, focusing on emotional storytelling and showcasing the unique experiences they provide.' },
+    { heading: 'Post 1 : Luxury & Elegant Wedding Experience', list: [
+      '<strong>Target Audience:</strong> Ultra-high-net-worth and Class A+ brides and grooms seeking to orchestrate a legendary wedding that blends absolute luxury with classic, detail-oriented elegance, while emphasizing experience and social status.',
+      '<strong>Objective:</strong> To establish Ohoud Weddings as a top-tier luxury event planner and showcase the ability to transform spaces and details into a luxurious, dreamlike visual experience.',
+      '<strong>Visual Direction:</strong> Warm, cinematic lighting that highlights the details of the crystal chandeliers, luxurious floral arrangements, and interactive lighting elements.Slow camera movement (cinematic pan and glide) to convey a sense of spaciousness and sophistication.Focus on wide landscape shots of the venue, transitioning smoothly to macro detail shots of the tables and the kosha (ceremonial seating area).',
+      '<strong>Creative Concept:</strong> Centered on the idea of ​​"Crafting Timeless Masterpieces." We do not merely organize weddings; we create an extraordinary, memorable night that meets the clients highest aspirations.',
+      '<strong>Caption:</strong> A day filled with love, beautiful moments, and details we’ll never get tired of looking back on Four Seasons Hotel',
+      '<a href="https://www.instagram.com/reel/DbnoxlwI6Vd/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="project-btn">Go to Post ↗</a>'
+    ]},
+    { heading: 'Post 2 : Presentation of the table layout and spatial experience (slideshow)', list: [
+      '<strong>Target Audience:</strong> The elite and high-end (Class A+) brides who are keen to view décor and design from every angle, and who specifically value the finishing touches and table styling.',
+      '<strong>Objective:</strong> To highlight the small details that make a significant difference in the look and feel of a wedding or event.',
+      '<strong>Visual Direction:</strong> How can I clearly and precisely show her the layout, table setup, and tableware arrangements to make the wedding night easier for her and ensure she doesnot feel stressed or overwhelmed?',
+      '<strong>Creative Concept:</strong> Utilizing a carousel format to provide the bride with an interactive walkthrough experience—as if she were strolling through the venue and seeing firsthand the precision with which every detail has been executed.',
+      '<strong>Caption:</strong> The most beautiful weddings are found in the details.Always elegantly curated yet uniquely yours.',
+      '<a href="https://www.instagram.com/p/DbVq9IyCNiY/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="project-btn">Go to Post ↗</a>'
+    ]},
+    { heading: 'Post 3 : Atmosphere, Energy & Unforgettable Moments (Reel)', list: [
+      '<strong>Target Audience:</strong> B2B clients, corporations, and large organizations requiring event planning and robust organization that befits their stature.',
+      '<strong>Objective:</strong> To create an emotional connection and showcase event dynamics; to demonstrate that Ohoud Weddings is not merely a skilled wedding planner but an exceptional event planner—one who designs décor and crafts a complete experience and atmosphere.',
+      '<strong>Visual Direction:</strong> Dynamic, fast-paced editing synchronized with sophisticated cinematic music.Use of warm colors and vibrant lighting that reflects a joyful mood and a luxurious ambiance.Cutting between guest reactions and cinematic shots of the venue.',
+      '<strong>Creative Concept:</strong>  Focusing on the idea of ​​"The Unforgettable Vibe" highlighting the emotional impact of luxury event planning and emphasizing that the right combination of lighting and venue is what creates the events atmosphere and fosters genuine moments.',
+      '<strong>Caption:</strong> Some events are attended.Others are remembered. ✨Behind every powerful gathering is a vision, a team, and countless details coming together to create something unforgettable.Proud to have been part of bringing this experience to life, alongside @hilton_pyramids_golfBecause when the right people, ideas, and details come together something extraordinary happens.',
+      '<a href="https://www.instagram.com/reel/DcL-Gx9oZSm/?utm_source=ig_web_copy_link&igsi=MzRlODBiNWFlZA==" target="_blank" rel="noopener" class="project-btn">Go to Post ↗</a>'
+    ]}
+  ],
+  posts: []
+},
+jfuel: {
+  badge: 'E-COMMERCE GROWTH',
+  title: 'JFUEL Supplements — Website Banners Strategy',
+  cover: './images/jfuel.jpeg',
+  slides: [],
+  sections: [
+    { heading: 'Objective:', text: 'To design and plan the main website banner strategy for the nutritional supplement brand JFUEL, aiming to optimize conversion rates and guide customers based on their fitness and lifestyle needs (Fat Loss, Focus & Lifestyle, Peak Performance).' },
+  ],
+  pdf: {
+    image: './images/jfuel-1.png',
+    url: 'jfuel_Website Banners.pdf'
+  },
+  posts: []
+},
+
+sos: {
+  badge: 'Full Case Study',
+  title: 'SOS — Website Banners Strategy',
+  cover: './images/sos.jpeg',
+  slides: [],
+  sections: [
+    { heading: 'Objective:', text: 'Developing an integrated content strategy and seasonal campaigns for SOS Childrens Villages Egypt for 2026, with the aim of converting digital engagement into sustainable donations, building a supportive community for the organization, and preparing the digital infrastructure ahead of the peak donation season (Ramadan).' },
+    { heading: 'Role:', text: 'Content Strategist & Media Buyer' },
+    { heading: 'Category:', text: 'NGO & Non-Profit Fundraising Strategy' },
+    { heading: 'Key Strategic Pillars:', text: 'Digital Readiness & Funnel Setup: Mandating the integration of landing pages with tracking tools and providing various express payment options (InstaPay, digital wallets, MegaKheir) to minimize friction during the donation process.' },
+    { heading: 'Data-Driven Content Strategy:', text: 'Categorizing content into seven core pillars—covering transparency, education, and human-interest stories—while defining monthly post volumes for each pillar.' },
+    { heading: 'Ramadan Core Campaigns (Emotional Framing):', text: ' Campaign A ("Let Goodness Become a Memory"): Leveraging nostalgia by linking childhood Ramadan memories to the right of SOS children to create their own first heartwarming memory, executed across three operational phases (Pre-Ramadan ➔ Launch ➔ Direct Response). Campaign B ("Your Donation is a Seed of Goodness"): A growth-metaphor strategy, where the donation is portrayed as a "seed" planted during Ramadan that grows to provide future stability and security for the children.' },
+  ],
+    slides: ['./images/sos-1.jpeg',
+            './images/sos-2.jpeg',
+            './images/sos-3.jpeg',
+            './images/sos-4.jpeg',
+            './images/sos-5.jpeg',
+            './images/sos-6.jpeg',
+            './images/sos-7.jpeg',
+            './images/sos-8.jpeg',
+  ],
+    posts: [
+    { label: 'Post 1', url: 'https://www.instagram.com/reel/DVV_OqjDHe7/?igsi=MXdma3E2amJoZXRxag==' },
+    { label: 'Post 2', url: 'https://www.instagram.com/p/DVqoYGaDBoU/?igsi=djFraGh4MDJ4N2Fo' },
+    { label: 'Post 3', url: 'https://www.instagram.com/p/DVqoYGaDBoU/?igsi=djFraGh4MDJ4N2Fo' }
+  ]
+},
+ibrand: {
+  badge: 'Creative Writing',
+  Brand: 'iBrand (Saudi Arabia E-Pharmacy & Personal Care)',
+  title: 'iBrand KSA — E-Commerce Digital Strategy & Growth Plan',
+  client: 'iBrand KSA · Role: Digital Strategy & Growth Specialist',
+  cover: './images/i-brand.jpeg',
+  slides: [],
+  sections: [
+    { heading: 'Objective:', text: 'Transform iBrand from a mere online pharmacy offering random discounts into the go-to destination for ordering monthly essentials at the lowest price in Saudi Arabia ("The Everyday Cart, For Less"), while protecting advertising budgets and optimizing conversion rates.' },
+    { heading: 'Core Strategic Pillars:', list: [
+      '<strong>A. Conversion Readiness:</strong> The Insight: Paid traffic wins the click, but the website wins the sale. The Problem: The current mobile site speed is 26.2 seconds, resulting in a direct waste of advertising budgets before the customer even sees the products. The Action: Mandate site speed optimization as a top priority before scaling ad spend to ensure the highest ROAS.',
+      '<strong>B. Positioning & Competitive Gap:</strong> The Insight: Major competitors (Nahdi, Al-Dawaa, Al-Muttahida) focus on trust and discounts as temporary offers. The Gap: No brand has secured the position of "the most affordable monthly basket at near-wholesale prices and single-item deals." The Positioning: "Bulk prices. Without the bulk."',
+      '<strong>C. Mission-First Audience Targeting:</strong> Instead of traditional targeting based on age and gender, the audience was segmented by "shopping mission," with each ad directing users to a dedicated landing page: "Monthly Re-stocker" (monthly household supplies); "Routine Builder" (skincare and beauty on a balanced budget); "New Parent" (baby essentials); "Wellness Re-stocker" (vitamins and supplements); and "Local Deal-Seeker" (offers for the Makkah, Madinah, and Al-Taif regions).',
+      '<strong>D. Media Buying System & Funnel Execution:</strong> Google Ads Audit: The account is achieving a 10x–14x ROAS, with recommendations to scale Shopping Campaigns and long-tail keywords. Meta Ads Audit: Achieving a 3.5x ROAS, with opportunities to scale via Dynamic Product Ads (DPA) and campaign restructuring. Cart Recovery Engine: Implementing a smart retargeting strategy (Meta DPA + Google Remarketing) to recover abandoned carts within 24 hours (delivering the highest ROI in the plan).'
+    ]}
+  ],
+      slides: ['./images/ibrand-1.jpeg',
+            './images/ibrand-2.jpeg',
+            './images/ibrand-3.jpeg',
+            './images/ibrand-4.jpeg',
+            './images/ibrand-5.jpeg',
+            './images/ibrand-6.jpeg',
+            './images/ibrand-7.jpeg',
+            './images/ibrand-8.jpeg',
+  ],
+      posts: [
+    { label: 'Post 1', url: 'https://www.instagram.com/reel/Da2FQg1DLAW/?igsi=YjBrNnJqOHh4Yg==' },
+    { label: 'Post 2', url: 'https://www.instagram.com/reel/DbTU2AqoDFI/?igsi=dTU3OXA2ZXR4Mzh0' },
+    { label: 'Post 3', url: 'https://www.instagram.com/reel/DcbTilBocT9/?igsi=MWIwdXI0dmFjMnllZQ==' }
+  ]
+}
+  };
+
+  let currentSlides = [];
+  let currentSlideIndex = 0;
+
+  function renderSlide() {
+    const track = document.getElementById('modalSlideTrack');
+    track.innerHTML = currentSlides.map((src, i) => `<img src="${src}" class="${i === currentSlideIndex ? 'active' : ''}" alt="Project slide ${i + 1}">`).join('');
+    document.querySelectorAll('#slideDots .slide-dot').forEach((d, i) => d.classList.toggle('active', i === currentSlideIndex));
+  }
+
+  function openProjectModal(id) {
+    const data = projectsData[id];
+    if (!data) return;
+
+    document.getElementById('modalCover').src = data.cover;
+    document.getElementById('modalCover').alt = data.title;
+    document.getElementById('modalBadge').textContent = data.badge || '';
+    document.getElementById('modalTitle').textContent = data.title || '';
+    document.getElementById('modalClient').textContent = data.client || '';
+
+    document.getElementById('modalSections').innerHTML = (data.sections || []).map(s => {
+      if (s.list) {
+        return `<div class="project-modal-section"><h4>${s.heading}</h4><ul>${s.list.map(li => `<li>${li}</li>`).join('')}</ul></div>`;
+      }
+      return `<div class="project-modal-section"><h4>${s.heading}</h4><p>${s.text}</p></div>`;
+    }).join('');
+
+    const slidesLabel = document.querySelector('.project-modal-slides-label');
+    const slidesBlock = document.querySelector('.project-modal-slides');
+
+    if (!data.slides || data.slides.length === 0) {
+      slidesLabel.style.display = 'none';
+      slidesBlock.style.display = 'none';
+    } else {
+      slidesLabel.style.display = '';
+      slidesBlock.style.display = '';
+      currentSlides = data.slides;
+      currentSlideIndex = 0;
+      const dotsEl = document.getElementById('slideDots');
+      dotsEl.innerHTML = currentSlides.map((_, i) => `<button type="button" class="slide-dot${i === 0 ? ' active' : ''}" data-index="${i}" aria-label="Go to slide ${i + 1}"></button>`).join('');
+      dotsEl.querySelectorAll('.slide-dot').forEach(dot => {
+        dot.addEventListener('click', () => { currentSlideIndex = parseInt(dot.dataset.index, 10); renderSlide(); });
+      });
+      renderSlide();
+    }
+
+    document.getElementById('modalPosts').innerHTML = (data.posts || []).map(p => `<a href="${p.url}" target="_blank" rel="noopener">${p.label}</a>`).join('');
+
+    const pdfPreview = document.getElementById('modalPdfPreview');
+    const pdfImage = document.getElementById('modalPdfImage');
+    if (data.pdf && data.pdf.image && data.pdf.url) {
+      pdfPreview.style.display = '';
+      pdfImage.src = data.pdf.image;
+      pdfImage.alt = data.title + ' — full presentation';
+      pdfImage.onclick = () => window.open(data.pdf.url, '_blank', 'noopener');
+    } else {
+      pdfPreview.style.display = 'none';
+    }
+
+    document.getElementById('projectModalOverlay').classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
+
+  function closeProjectModal() {
+    document.getElementById('projectModalOverlay').classList.remove('active');
+    document.body.style.overflow = '';
+  }
+
+  document.getElementById('slidePrev').addEventListener('click', () => {
+    currentSlideIndex = (currentSlideIndex - 1 + currentSlides.length) % currentSlides.length;
+    renderSlide();
+  });
+  document.getElementById('slideNext').addEventListener('click', () => {
+    currentSlideIndex = (currentSlideIndex + 1) % currentSlides.length;
+    renderSlide();
+  });
+  document.getElementById('projectModalClose').addEventListener('click', closeProjectModal);
+  document.getElementById('projectModalOverlay').addEventListener('click', e => {
+    if (e.target.id === 'projectModalOverlay') closeProjectModal();
+  });
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeProjectModal();
   });
 </script>
 </body>
